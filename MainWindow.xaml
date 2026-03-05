@@ -1,0 +1,134 @@
+﻿<Window x:Class="DataStructuresProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Makale Graf Analiz - by KadiRR" Height="875" Width="1400">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#EEEEEE" Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,5,0">
+            <StackPanel>
+                <TextBlock Text="KONTROL PANELİ" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                    
+
+                    <Button Name="btnDosyaYukle" Content="Veri Yükle (JSON)" Height="30" Margin="0,5" Click="btnDosyaYukle_Click"/>
+                <Button Name="btnCiz" Content="Grafı Çiz" Height="30" Margin="0,5" Click="btnCiz_Click"/>
+                <CheckBox Name="chkSpiralMod" Content="Spiral Mod (Analiz)" Margin="0,5" IsChecked="False"/>
+                <CheckBox Name="chkGenelAnalizModu" Content="Genel Analiz Modu (Hepsi Görünür)" Margin="0,5" IsChecked="False"/>
+                <Separator Margin="0,10"/>
+
+                <Separator Margin="0,10"/>
+
+                    <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="5" Background="White" Padding="5" Margin="0,0,0,10">
+                        <StackPanel>
+                            <TextBlock Text="Makale ID ile Ara:" FontSize="10" Foreground="Gray" Margin="0,0,0,2"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Name="txtSearchId" Grid.Column="0" Height="25" VerticalContentAlignment="Center" Padding="2" ToolTip="Tam ID giriniz."/>
+                                <Button Name="btnAra" Grid.Column="1" Content="Bul" Width="40" Margin="5,0,0,0" Click="btnAra_Click" Background="#DDDDDD"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Separator Margin="0,10"/>
+
+                    <TextBlock Text="İSTATİSTİKLER" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBlock Name="lblDugumSayisi" Text="Düğüm Sayısı: 0"/>
+                <TextBlock Name="lblKenarSayisi" Text="Kenar Sayısı: 0"/>
+                <TextBlock Name="lblToplamVerilen" Text="Toplam Verilen Ref: 0"/>
+                <TextBlock Name="lblToplamAlinan" Text="Toplam Alınan Ref: 0"/>
+
+                <Separator Margin="0,10"/>
+
+                <TextBlock Text="EN ÇOK ATIF ALAN" FontWeight="Bold" Margin="0,5,0,0"/>
+                <TextBlock Name="lblEnCokAtifAlan" Text="-" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                <TextBlock Text="EN ÇOK ATIF VEREN" FontWeight="Bold" Margin="0,5,0,0"/>
+                <TextBlock Name="lblEnCokAtifVeren" Text="-" TextWrapping="Wrap"/>
+
+                <Separator Margin="0,10"/>
+
+                <TextBlock Text="SEÇİLİ MAKALE ANALİZİ" FontWeight="Bold" Margin="0,5,0,5" Foreground="DarkRed"/>
+
+                <StackPanel>
+                    <TextBlock Text="ID:" FontWeight="Bold" FontSize="10"/>
+                    <TextBox Name="txtDetayId" Text="-" IsReadOnly="True" BorderThickness="0" Background="Transparent" TextWrapping="Wrap" FontSize="10" Margin="0,0,0,5"/>
+
+                    <TextBlock Text="Başlık:" FontWeight="Bold" FontSize="10"/>
+                    <TextBlock Name="lblDetayTitle" Text="-" TextWrapping="Wrap" Margin="0,0,0,5" Foreground="DarkSlateGray"/>
+
+                    <TextBlock Text="Yazarlar:" FontWeight="Bold" FontSize="10"/>
+                    <TextBlock Name="lblDetayAuthors" Text="-" TextWrapping="Wrap" Margin="0,0,0,5" FontSize="11" FontStyle="Italic"/>
+
+                    <Grid Margin="0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,5,5">
+                            <TextBlock Text="Yıl" FontWeight="Bold" FontSize="10"/>
+                            <TextBlock Name="lblDetayYear" Text="-"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,0,0,5">
+                            <TextBlock Text="Atıf Sayısı" FontWeight="Bold" FontSize="10"/>
+                            <TextBlock Name="lblDetayCitation" Text="-"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,5">
+                            <TextBlock Text="H-Index" FontWeight="Bold" FontSize="10"/>
+                            <TextBlock Name="lblHIndex" Text="-" Foreground="Blue" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,5">
+                            <TextBlock Text="H-Median" FontWeight="Bold" FontSize="10"/>
+                            <TextBlock Name="lblHMedian" Text="-" Foreground="Blue" FontWeight="Bold"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0">
+                            <TextBlock Text="Merkezilik (Betweenness)" FontWeight="Bold" FontSize="10"/>
+                            <TextBlock Name="lblCentrality" Text="-" Foreground="DarkRed" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <Separator Margin="0,10"/>
+
+                <TextBlock Text="K-CORE ANALİZİ" FontWeight="Bold" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="K Değeri:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox Name="txtKDegeri" Width="40" Text="2" VerticalContentAlignment="Center" Padding="2"/>
+                    <Button Content="Uygula" Width="60" Margin="10,0,0,0" Click="btnKCore_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Border Name="AnaPanel" Grid.Column="1" ClipToBounds="True" Background="White"
+                MouseWheel="AnaPanel_MouseWheel"
+                MouseLeftButtonDown="AnaPanel_MouseLeftButtonDown"
+                MouseLeftButtonUp="AnaPanel_MouseLeftButtonUp"
+                MouseMove="AnaPanel_MouseMove">
+
+            <Canvas Name="CizimAlani" Width="3000" Height="3000">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="st"/>
+                        <TranslateTransform x:Name="tt"/>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Border>
+    </Grid>
+</Window>
